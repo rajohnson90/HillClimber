@@ -200,4 +200,50 @@ public class FoodSelectionNode {
 	    hash += Arrays.hashCode(foodChosen);
 	    return hash;
 	}
+	
+	/**
+	 * Returns the total cost of a food selection. 
+	 * @return
+	 */
+	public int getFoodCost()
+	{
+		int[] nutrientsAndCost = calculateTotalNutrientsAndCost();
+		
+		//
+		return nutrientsAndCost[5];
+	}
+	
+	/**
+	 * Checks whether or not the nutrients are all greater than 95%. (The minimum qualification for a solution).
+	 * @return
+	 */
+	public boolean nutrientsGreaterThan95Percent()
+	{
+		int[] nutrientAndCost = calculateTotalNutrientsAndCost();
+		for(int i = 0; i < nutrientAndCost.length-1; i++)
+		{
+			if(nutrientAndCost[i] < 95)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Checks whether or not the nutrients are all greater than 110%. (The minimum qualification for a starting point in my implementation.).
+	 * @return
+	 */
+	public boolean nutrientsGreaterThan110Percent()
+	{
+		int[] nutrientAndCost = calculateTotalNutrientsAndCost();
+		for(int i = 0; i < nutrientAndCost.length-1; i++)
+		{
+			if(nutrientAndCost[i] < 110)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }

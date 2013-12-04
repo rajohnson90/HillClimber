@@ -16,11 +16,17 @@ public class WeightedTotalDistanceToGoal implements Heuristic {
 		int totalDistance = 0;
 		for(int i = 0; i < lengthOfNutrients; i++)
 		{
+			//System.out.println("currentNodeArray[" + i + "]: " + currentNodeArray[i]);
 			totalDistance += Math.abs(100-currentNodeArray[i]);
 		}
-		
+		//System.out.println("Cost: " + currentNodeArray[lengthOfNutrients]);
+		//System.out.println("Total distance: " + totalDistance);
 		// Return the total distance for all nutrients to reach 100 multiplied by the total cost of this node. 
-		return totalDistance*currentNodeArray[lengthOfNutrients];
+		/*if(currentNodeArray[lengthOfNutrients] == 0)
+		{
+			return 20000;
+		}*/
+		return  (totalDistance);
 	}
 
 }

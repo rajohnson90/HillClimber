@@ -20,8 +20,8 @@ public class RandomRestartHillClimb {
 		FoodSelectionNode bestSolution = new FoodSelectionNode();
 		
 		FoodSelectionNode startState = new FoodSelectionNode(generateRandomStartingState());
-		/*System.out.println("Start state at iteration " + 0 + ": " + startState);
-		System.out.println("The amounts are " + startState.totalNutrientsAndCostAsString());*/
+		System.out.println("Start state at iteration " + 0 + ": " + startState);
+		System.out.println("The amounts are " + startState.totalNutrientsAndCostAsString());
 		
 		bestSolution = hill.findMaximumFromStartState(startState);
 		
@@ -52,13 +52,12 @@ public class RandomRestartHillClimb {
 	{
 		int[] startingState = new int[20];
 		
-		for(int i = 0; i < 10; i++)
+		while(!(new FoodSelectionNode(startingState)).nutrientsGreaterThan110Percent())
 		{
 			int newFoodChoice = (int)Math.round(Math.random()*19);
 			startingState[newFoodChoice]++;
-			
 		}
-		
 		return startingState;
 	}
+	
 }

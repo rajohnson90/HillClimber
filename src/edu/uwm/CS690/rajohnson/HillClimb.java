@@ -35,7 +35,7 @@ public class HillClimb {
 		visitedNodes.add(nextBestNeighbor);
 		
 		// While the nutrients don't exceed 95% or the nextBestNeighbor is better than the previous best state 
-		while((!previousBest.totalNutrientsExceeds95Percent()) || (h.calculateHeuristic(previousBest) >=
+		while((h.calculateHeuristic(previousBest) >=
 			   h.calculateHeuristic(nextBestNeighbor)))
 		{
 			
@@ -127,13 +127,19 @@ public class HillClimb {
 		
 	}
 	
+	/**
+	 * Find the nodes in {@code generatedNeighbors} that are not in the set {@code visitedNodes}.
+	 * @param generatedNeighbors The {@code ArrayList} to check.
+	 * @param visitedNodes The set to check against for membership
+	 * @return An {@code ArrayList} of {@link FoodSelectionNode}s that are not in the set {@code visitedNodes}.
+	 */
 	private ArrayList<FoodSelectionNode> findUnvisitedNeighbors(ArrayList<FoodSelectionNode> generatedNeighbors, HashSet<FoodSelectionNode> visitedNodes)
 	{
 		ArrayList<FoodSelectionNode> unvisitedNeighbors = new ArrayList<FoodSelectionNode>(generatedNeighbors);
 		for(int i = 0;i < unvisitedNeighbors.size();)
 		{
 			//If the match checked exists in the DB already, then remove it, else iterate again
-			if(visitedNodes.contains(unvisitedNeighbors.get(i)))
+			if(visitedNodes.contains(unvisitedNeighbors.get(i)) || !unvisitedNeighbors.get(i).nutrientsGreaterThan95Percent())
 			{
 				unvisitedNeighbors.remove(i);
 			}
