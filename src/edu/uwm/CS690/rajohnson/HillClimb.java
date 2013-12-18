@@ -8,7 +8,7 @@ import java.util.HashSet;
 public class HillClimb {
 
 	private Heuristic h;
-	
+	private int nodesGenerated = 0;
 	public HillClimb(Heuristic heur) {
 		h = heur;
 	}
@@ -145,10 +145,16 @@ public class HillClimb {
 			}
 			else
 			{
+				nodesGenerated++;
 				i++;
 			}
 		}
 		
 		return unvisitedNeighbors;
+	}
+	
+	public int getNodesGenerated()
+	{
+		return nodesGenerated;
 	}
 }

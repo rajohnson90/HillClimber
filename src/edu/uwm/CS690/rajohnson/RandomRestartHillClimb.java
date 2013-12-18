@@ -13,28 +13,22 @@ public class RandomRestartHillClimb {
 	/**
 	 * Perform random restart hill climbing search that restarts {@code t} times. 
 	 * @param t The number of times to restart the during the random restart hill climbing search.
-	 * @return The best {@link FoodSelectionNode} found after performing {@code t} instances of hillclimbing starting at a random location. 
+	 * @return The best {@link FoodSelectionNode} found after performing {@code t} instances of hill climbing starting at a random location. 
 	 */
 	public FoodSelectionNode findBestSolutionAfterTIterations(int t)
 	{
 		FoodSelectionNode bestSolution = new FoodSelectionNode();
 		
 		FoodSelectionNode startState = new FoodSelectionNode(generateRandomStartingState());
-		System.out.println("Start state at iteration " + 0 + ": " + startState);
-		System.out.println("The amounts are " + startState.totalNutrientsAndCostAsString());
 		
 		bestSolution = hill.findMaximumFromStartState(startState);
 		
 		for(int i = 1; i < t; i++)
 		{
 			startState = new FoodSelectionNode(generateRandomStartingState());
-			/*System.out.println("Start state at iteration " + i + ": " + startState);
-			System.out.println("The amounts are " + startState.totalNutrientsAndCostAsString());*/
 			FoodSelectionNode currentState = hill.findMaximumFromStartState(startState);
 			// If the result of the most recent hill climbing search is better than the previous result,
 			// it is now the best solution.
-			/*System.out.println("The best solution is " + currentState);
-			System.out.println("The amounts are " + currentState.totalNutrientsAndCostAsString());*/
 			if(h.calculateHeuristic(currentState) <= h.calculateHeuristic(bestSolution))
 			{
 				bestSolution = currentState;
@@ -58,6 +52,11 @@ public class RandomRestartHillClimb {
 			startingState[newFoodChoice]++;
 		}
 		return startingState;
+	}
+	
+	public int getNodesGenerated()
+	{
+		return hill.getNodesGenerated();
 	}
 	
 }

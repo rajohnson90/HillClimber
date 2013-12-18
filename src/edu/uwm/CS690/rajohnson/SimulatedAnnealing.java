@@ -8,6 +8,7 @@ public class SimulatedAnnealing {
 
 	Heuristic h;
 	TempScheduler ts;
+	private int nodesGenerated = 0;
 	
 	public SimulatedAnnealing(Heuristic heur, TempScheduler scheduler) {
 		h = heur;
@@ -169,31 +170,6 @@ public class SimulatedAnnealing {
 		return startingState;
 	}
 	
-	/**
-	 * Find the nodes in {@code generatedNeighbors} that are not in the set {@code visitedNodes}.
-	 * @param generatedNeighbors The {@code ArrayList} to check.
-	 * @param visitedNodes The set to check against for membership
-	 * @return An {@code ArrayList} of {@link FoodSelectionNode}s that are not in the set {@code visitedNodes}.
-	 */
-	private ArrayList<FoodSelectionNode> findUnvisitedNeighbors(ArrayList<FoodSelectionNode> generatedNeighbors, HashSet<FoodSelectionNode> visitedNodes)
-	{
-		ArrayList<FoodSelectionNode> unvisitedNeighbors = new ArrayList<FoodSelectionNode>(generatedNeighbors);
-		for(int i = 0;i < unvisitedNeighbors.size();)
-		{
-			//If the match checked exists in the DB already, then remove it, else iterate again
-			if(visitedNodes.contains(unvisitedNeighbors.get(i)))
-			{
-				unvisitedNeighbors.remove(i);
-			}
-			else
-			{
-				i++;
-			}
-		}
-		
-		return unvisitedNeighbors;
-	}
-	
 	private ArrayList<FoodSelectionNode> findValidNeighbors(ArrayList<FoodSelectionNode> generatedNeighbors)
 	{
 		ArrayList<FoodSelectionNode> unvisitedNeighbors = new ArrayList<FoodSelectionNode>(generatedNeighbors);
@@ -205,10 +181,16 @@ public class SimulatedAnnealing {
 			}
 			else
 			{
+				nodesGenerated++;
 				i++;
 			}
 		}
 		return unvisitedNeighbors;
+	}
+	
+	public int getNodesGenerated()
+	{
+		return nodesGenerated;
 	}
 	
 }
